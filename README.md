@@ -21,7 +21,7 @@ This Project requires the following Versions:
 # Install:
 To install all dependencies in this project, open your terminal and run:
 ```
-pip install -r requireements.txt
+pip install -r requirements.txt
 ```
 
 # Credits:

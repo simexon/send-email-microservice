@@ -8,7 +8,7 @@ from send_email_microservice.settings import SENDGRID_API_KEY
 
 MAIL_RESPONSES = {
     '200': 'Mail sent successfully.',
-    '401': 'Incorrect request format.',
+    '400': 'Incorrect request format.',
     '500': 'An error occurred, could not send email.' 
 }
 

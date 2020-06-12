@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 # from rest_framework_swagger.views import get_swagger_view
 
 from rest_framework import permissions
@@ -27,10 +27,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="Send Mail API",
       default_version='v1',
-      description="Test description",
-      terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@snippets.local"),
-      license=openapi.License(name="BSD License"),
+      description="A simple service for sending emails.",
    ),
    public=True,
    permission_classes=(permissions.AllowAny,),
@@ -38,9 +35,8 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('v1/documentation/', schema_view.as_view(), {'format': '.json'}, name='schema-json'),
     path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    # path('', schema_view),
-    path('api/v1/', include('api.urls'))
+    path('redoc', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('v1/', include('api.urls'))
 ]
